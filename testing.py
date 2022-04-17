@@ -7,7 +7,7 @@ import calculator
 
 class test(unittest.TestCase):
     def test_root(self):
-        self.assertEqual(calculator.square_root(4), 1.0)
+        self.assertEqual(calculator.square_root(4), 2.0)
         self.assertEqual(calculator.square_root(9), 3.0)
         self.assertEqual(calculator.square_root(0), 0.0)
         self.assertEqual(calculator.square_root(1), 1.0)
