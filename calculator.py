@@ -29,17 +29,17 @@ if(__name__ == "__main__"):
         elif(i == "1"):
             print("enter a number ")
             x = int(input())
-            square_root(x)
+            print(square_root(x))
         elif(i == "2"):
             print("enter a number ")
             x = int(input())
-            fact(x)
+            print(fact(x))
         elif(i == "3"):
             print("enter a number ")
             x = int(input())
-            nat_log(x)
+            print(nat_log(x))
         elif(i == "4"):
             print("enter x and y such that x^y ")
             x, y = input().split()
-            power(int(x),int(y))
+            print(power(int(x),int(y)))
         
