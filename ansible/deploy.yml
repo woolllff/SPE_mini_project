@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: remove docker images
+      shell: docker image rm -f woolllff/calculator:latest
+    - name: Pull woolllff/calculator
+      docker_image:
+        name: woolllff/calculator
+        source: pull
+    - name: create docker image
+      shell: docker run -it woolllff/calculator:latest

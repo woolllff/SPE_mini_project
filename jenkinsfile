@@ -1,0 +1,46 @@
+pipeline {
+    environment {
+    registry = "woolllff/calculator" 
+    registryCredential = 'dockerhub_id' 
+    dockerImage = '' 
+    }
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github_id', url: 'https://github.com/woolllff/SPE_mini_project.git']]])
+            }
+        }
+
+        stage('Test'){
+            steps{
+                git 'https://github.com/woolllff/SPE_mini_project.git'
+                bat 'python testing.py'
+            }
+        }
+        stage('Build Docker'){
+            steps{
+                script { 
+                dockerImage = docker.build registry + ":latest" 
+                }
+            }
+        }
+        stage('Push Docker Image'){
+            steps{
+                script { 
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                } 
+            }
+        }
+        stage('Cleaning up') { 
+            steps { 
+                bat "docker rmi $registry:latest" 
+            }
+        }
+        
+        
+    }
+}
